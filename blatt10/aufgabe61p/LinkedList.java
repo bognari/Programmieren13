@@ -1,20 +1,20 @@
 package blatt10.aufgabe61p;
 
 /**
- * Implementiert das List Interface als sortierte Liste
- * das erste Element dient als Steurerelement
+ * Implementiert das List Interface als sortierte Liste das erste Element dient
+ * als Steurerelement
  */
 public class LinkedList implements List {
 
     /**
      * Das zuspeichene Element
      */
-    private final Adresse       value;
+    private final Adresse value;
 
     /**
      * Der Nachfolger
      */
-    private LinkedList next;
+    private LinkedList    next;
 
     /**
      * Erstellt eine neue Liste mit leerem Kopf als Steuerelement

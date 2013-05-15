@@ -14,7 +14,8 @@ public class App {
     /**
      * Fügt alle Adressen aus der gegebenen CSV in eine Liste ein
      * 
-     * @param path zur CSV Datei der Adressen
+     * @param path
+     *            zur CSV Datei der Adressen
      * @return sorterite Liste von Adressen
      */
     private static List adressenCSV(String path) {
@@ -29,7 +30,7 @@ public class App {
             String line;
             Pattern pattern = Pattern.compile("^([^;]*);([^;]*);([^;]*);([^;]*);([^;]*)$");
             // vn; nn; sh; po; hn
-            // 1   2   3   4   5
+            // 1 2 3 4 5
             Matcher m;
             while (scanner.hasNextLine()) {
                 line = scanner.nextLine();
