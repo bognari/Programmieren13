@@ -1,4 +1,6 @@
-tu.bs.programmieren.2.aufgabe.61
+tu.bs.programmieren.2
 ================================
 
-unoffizielle Musterlösung zu Aufgabe 61
+unoffizielle Musterlösung zu:
+Aufgabe 61
+Aufgabe 66
