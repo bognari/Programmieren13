@@ -1,0 +1,674 @@
+%\documentclass[a4paper, 10pt, ngerman]{article}
+\documentclass[a4paper, 10pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{MnSymbol}
+
+\usepackage{geometry}
+\geometry{a4paper,left=24mm,right=18mm, top=2cm, bottom=3cm}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\setlength{\parindent}{0pt}
+
+\usepackage{rotating}
+
+\DeclareMathSizes{10}{8}{6}{4}
+\usepackage{tkz-berge}
+\usepackage{tikz} 
+\usetikzlibrary{arrows,automata,decorations.pathmorphing,backgrounds,shapes,positioning,fit,matrix}
+% Define block styles
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=15em, text centered, rounded corners, minimum height=4em, node distance=2cm]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm, text width=8em,
+    minimum height=2em]
+
+\usepackage{cases}
+\usepackage{sidecap}
+\usepackage{array}
+\usepackage{float}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+
+\usepackage{wasysym}
+
+\DeclareMathSizes{10}{8}{6}{4}
+
+\usepackage{listings}
+
+\usepackage{color}
+
+\definecolor{hellgrau}{rgb}{0.95,0.95,0.95}
+ 
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+ 
+\definecolor{javared}{rgb}{0.6,0,0} % for strings
+\definecolor{javagreen}{rgb}{0.25,0.5,0.35} % comments
+\definecolor{javapurple}{rgb}{0.5,0,0.35} % keywords
+\definecolor{javadocblue}{rgb}{0.25,0.35,0.75} % javadoc
+
+\lstset{language=Java,
+numbers=left,
+numbersep=5pt,
+stepnumber=2,
+%numberstyle=\tiny\color{mygray},
+%breaklines=true,
+keywordstyle=\color{green!40!black},
+commentstyle=\color{magenta!40!black},
+identifierstyle=\color{blue},
+stringstyle=\color{orange},
+otherkeywords={$, \{, \}, \[, \]},
+frame=single,
+tabsize=2
+}
+
+\headheight 35pt
+
+\renewcommand \thesection{Aufgabe: \Roman{section}}
+\renewcommand \thesubsection{\alph{subsection})}
+\newcommand \ol[1]{\overline{#1}}
+\newcommand \zz{$\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}$}
+\newcommand \zw{$\mathrm{Z\kern-.3em\raise-0.5ex\hbox{W}}$}
+\newcommand{\RT}[1]{\rotatebox{180}{#1}}
+\newcommand \tab{\noindent\hspace*{0.3cm}}
+\newcommand{\monus}{\stackrel{{}^{\scriptstyle .}}{\smash{-}}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash} m{#1} }
+
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+  {\savebox\mybox{#1}\begin{quote}}
+  {\signed{\usebox\mybox}\end{quote}}
+
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+\begin{document}
+\section*{Übungsklausur}
+\subsection*{Aufgabe 1: JDK}
+\subsubsection*{a)}
+help und version sind zwei mögliche Optionen, mit denen der Java-Compiler \textbf{javac}
+aufgerufen werden kann. Nennen Sie zwei weitere und beschreiben Sie deren Wirkung.\\
+
+Lösung:\\
+\begin{lstlisting}[language=bash]
+C:\Windows\system32>javac -help
+Usage: javac <options> <source files>
+where possible options include:
+  -g                         Generate all debugging info
+  -g:none                    Generate no debugging info
+  -g:{lines,vars,source}     Generate only some debugging info
+  -nowarn                    Generate no warnings
+  -verbose                   Output messages about what the compiler is doing
+  -deprecation               Output source locations where deprecated APIs are u 
+                             sed
+  -classpath <path>          Specify where to find user class files and annotati
+                             on processors
+  -cp <path>                 Specify where to find user class files and annotati
+                             on processors
+  -sourcepath <path>         Specify where to find input source files
+  -bootclasspath <path>      Override location of bootstrap class files
+  -extdirs <dirs>            Override location of installed extensions
+  -endorseddirs <dirs>       Override location of endorsed standards path
+  -proc:{none,only}          Control whether annotation processing and/or compil
+                             ation is done.
+  -processor <class1>[,<class2>,<class3>...] Names of the annotation processors
+                             to run; bypasses default discovery process
+  -processorpath <path>      Specify where to find annotation processors
+  -d <directory>             Specify where to place generated class files
+  -s <directory>             Specify where to place generated source files
+  -implicit:{none,class}     Specify whether or not to generate class files for
+                             implicitly referenced files
+  -encoding <encoding>       Specify character encoding used by source files
+  -source <release>          Provide source compatibility with specified release
+  -target <release>          Generate class files for specific VM version
+  -version                   Version information
+  -help                      Print a synopsis of standard options
+  -Akey[=value]              Options to pass to annotation processors
+  -X                         Print a synopsis of nonstandard options
+  -J<flag>                   Pass <flag> directly to the runtime system
+  -Werror                    Terminate compilation if warnings occur
+  @<filename>                Read options and filenames from file
+\end{lstlisting}
+\subsubsection*{b)}
+
+Der Java-Compiler \textbf{javac} und der Java-Interpreter \textbf{java} sind zwei Programme des
+Java Development Kits (JDK). Nennen Sie drei weitere und beschreiben Sie deren
+Aufgaben.\\
+
+Lösung:\\
+
+\begin{itemize}
+  \item \textbf{jar} zum Erstellen von Jar Archiven
+  \item \textbf{javadoc} zum Erzeugen von HTML Dokumentationen aus den javadoc Kommentaren im Quellcode
+  \item \textbf{jarsigner} zum Signieren von Jar Archiven
+  \item \textbf{appletviewer} Browser zum "'Testen"' von Java Applets (stellt nur Applets da)
+  \item \dots
+\end{itemize}
+
+\subsection*{Aufgabe 2: GUI und Datenstrukturen}
+Beschreiben Sie kurz die Aufgaben der folgenden Klassen/Schnittstellen der \textbf{Swing}-Bibliothek bzw. des \textbf{JCF} (Java Collection Frameworks).
+
+\begin{tabular}{ll}
+JLabel: 	& Darstellung von Texten und Bildern\\
+JComboBox: 	& Eine aufklappbare Liste von Elementen, bei der ein bis mehrere Elemente selektiert werden können\\
+JList: 		& Liste von Elementen (nicht aufklappbar), bei der ein bis mehrere Elemente selektiert werden können\\
+JTextField: & Textfelt zur Eingabe von einer Zeile\\
+JScrollbar: & Scrollbar, welches die Darstellung von einem Objekt steuert\\
+Collection: & Zusammenfassung von endlich vielen Elementen zu einer Einheit\\
+Set: 		& Interface für Mengen (mit allen bekannten Mengenoperationen)\\
+SortedSet: 	& Interface für sortierte (total) Mengen, ergbt von Set\\
+List: 		& Interface für Listen 
+\end{tabular}
+
+\subsection*{Aufgabe 3: Enumeration, Packages, Annotationen, Parallelprogrammierung}
+\begin{tabular}{llll}
+& & wahr & falsch\\ 
+1.& Enum-Klassen können instanziiert werden.  & & \CheckedBox \\
+2.& Enum-Werte können mit dem Operator == auf
+Gleichheit getestet werden. & \CheckedBox &  \\
+3.& Wenn eine Klasse keine package-Anweisung enthält,
+wird sie dem Default-Paket zugeordnet. & \CheckedBox & \\
+4.& Klassen des Default-Pakets können ohne explizite
+import-Anweisung verwendet werden. & \CheckedBox & \\
+5.& Annotationen stehen vor dem Programmelement, das sie annotieren. & \CheckedBox & \\
+6.& Annotationen beginnen mit dem Zeichen @. & \CheckedBox & \\
+7.& Der Algorithmus von Dekker verwendet aktives Warten
+zur Synchronisation der Prozesse.  & \CheckedBox &\\
+8.& Ein Semaphor kann nur Werte, die größer als 0 sind, annehmen. & & \CheckedBox  
+\end{tabular}\\
+
+Anmerkungen:\\
+
+\begin{tabular}{lp{15cm}} 
+1.& Falsch, da Emums durch die JVM verwaltet werden. Beim Laden von Enum Klassen wird automatisch im Hintergrund ein Enum Objekt erstellt und ist für den Programmierer zur Laufzeit nicht änderbar.\\
+2.& Wahr, da jedes Enum Objekt nur einmal im Speicher existiert, somit müssen auch die Speicherzellen gleich sein.\\
+3.& Wahr, oder habt ihr jemals einen Paketnamen verteilen müssen?\\
+7.& Wahr: while (turn != 0) \{\}  ist aktives Warten\\
+8.& Falsch, da bei 0 die Threads schlafen gelegt werden.  
+\end{tabular}
+
+\subsection*{Aufgabe 4: Zuverlässigkeit von Programmen}
+Welche der beiden folgenden Regeln zum Nachweis der partiellen Korrektheit sind korrekt?\\
+
+1. $\frac{\{p\}\;S\; \{r\}, r\; \wedge \;e \;\to \;p, \;r \wedge \;\neg e \;\to \;q}{\{p\} \;while\;e\;do\;S\;od\;\{q\}}$
+\\
+
+2. $\frac{\{p\}\;S\; \{r\}, r\; \wedge \;e\; \to\; p, \;r \wedge \;\neg e  \;\to q}{\{p\} \;while\;e \vee\; \neg e\;do\;S\;od\;\{q\}}$
+\\
+
+Lösung:\\
+
+1. Kann nicht korrekt sein, da nicht sichergestellt wurde, das $S$ ausgefürht wird.\\
+
+2. Da $while\; e \; \vee \; \neg e$ immer True ergibt, "'hängt"' das Programm in einer Endlosschleife fest. Somit terminiert es nie, daswegen ist es partiell korrekt. 
+
+\subsection*{Aufgabe 5: Zuverlässigkeit von Programmen}
+
+\begin{lstlisting}
+static int f(int m, int n) {
+  assert m <= n; // Vorbedingung P
+  int s = m+n,
+  i = m;
+  assert ... // Schleifeninvariante Q
+  while ( i <= n ) {
+    s = s - 2*i;
+    i = i + 1;
+    assert ... // Schleifeninvariante Q
+  }
+  assert ... // Nachbedingung R
+  return s;
+}
+\end{lstlisting}
+
+\subsubsection*{a)}
+Es wird der Wert $m+n-\sum^n_{j=m}2j$ berechnet. Eine entsprechende
+Nachbedingung ist daher R : $m+n-\sum^n_{j=m}2j$.
+\subsubsection*{b)}
+Eine zum Nachweis der partiellen Korrektheit von $f$ bezüglich P und R geeignete
+Schleifeninvariante ist Q : $m \leq i \leq n + 1 \wedge s = m + n \sum^{i - 1}_{j = m}2j$.
+\subsubsection*{c)}
+\begin{lstlisting}
+R: s == m * m - n * n
+Q: m <= i && i <= n + 1 && s == n + m * m - i * i + i
+\end{lstlisting}
+
+\subsection*{Aufgabe 6: Programmverständnis, Fehlerkorrektur}
+Bei der Ausführung des folgenden
+Programms soll ein JFrame geöffnet werden, das einen JButton im oberen Fensterteil enthält.
+Bei Betätigung des JButtons soll die Hintergrundfarbe blau werden. Das Programm
+enthält Fehler.
+
+\begin{lstlisting}
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Test extends JFrame {
+  JButton button;
+  
+  public Test() {
+    c = getContentPane(); // c nicht Deklariert
+    button = new JButton("TestButton");
+    c.add(button, BorderLayout.SOUTH); // import fuer BorderLayout fehlt
+    // der Button sollte nach North statt South
+    Listener l = new Listener();
+    button.addActionListener(l);
+  }
+  
+  class Listener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      Color farbe = new Color(000,255,000); // import fuer Color fehlt
+      // es sollte auch Blau statt Gruen verwendet werden
+      c.setBackground(farbe); // c muss sich erst "geholt" werden
+    }
+  }
+  
+  public static void main(String[] args) {
+    Test t = new Test();
+    t.setTitle("TestFrame");
+    t.setSize(400,200);
+    t.setLocation(200,200);
+    t.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    // die GUI wird nie mit setVisible(true) angezeigt
+  }
+}
+\end{lstlisting}
+
+\subsection*{Aufgabe 7: Datenstrukturen, Programmierung}
+Gegeben seien die beiden Klassen Node
+und List zur Implementierung verketteter Listen:
+
+\begin{lstlisting}
+public class Node {
+	public int item;
+	public List next;
+	
+	public Node(int item) {
+		this.item = item;
+		this.next = new List();
+	}
+}
+
+public class List {
+	public Node node = null;
+	
+	public boolean isEmpty() {
+		return node == null;
+	}
+	
+	public void insert(int x) {
+		if (isEmpty())
+			node = new Node(x);
+		else {
+			Node n = new Node(x);
+			n.next.node = node;
+			node = n;
+		}
+	}
+	
+	public String toString() {
+		String s = "<";
+		if (!isEmpty()) {
+			s = s+node.item+"; ";
+			return s = s+node.next;
+		}
+		return s+">";
+	}
+}
+\end{lstlisting}
+\subsubsection*{a)}
+Was gibt das folgende Programmfragment aus?
+
+\begin{lstlisting}
+List l = new List();
+l.insert(2); l.insert(-4); l.insert(3); l.insert(6);
+System.out.println(l);
+\end{lstlisting}
+
+$<6;\;<3;\;<-4;\;<2;\;<>$
+
+\subsubsection*{b)}
+Schreiben Sie eine Methode boolean \textbf{isPermutation()}, die den Wert true genau
+dann liefert, falls die aktuelle Liste jede der Zahlen $1, 2, \ldots, n$ genau einmal enthält,
+wobei $n$ die Anzahl der Listenelemente ist. Beispiel: Die Methode soll true für die
+Listen $4, 2, 1, 3$ und $5, 1, 2, 3, 4$ sowie false für die Listen $3, 3, 1, 2$ und $1, 2, 4$ liefern.\\
+
+gibt sicherlich bessere Implementierungen
+
+\begin{lstlisting}
+boolean isPermutation() {
+    int max = 0;
+    Node cur = node;
+    while (cur != null) { 
+        if (cur.item < 1) { // kein element darf kleiner als 1 sein
+            return false;
+        }
+        if (cur.item > max) { // suche maximales element
+            max = cur.item;
+        }
+        cur = cur.next.node;
+    }
+    
+    boolean[] check = new boolean[max + 1];
+    
+    cur = node;
+    while (cur != null) { // teste ob doppelt
+        if (!check[cur.item]) {
+            check[cur.item] = true;
+        } else {
+            return false;
+        }
+        cur = cur.next.node;
+    }
+    
+    for (int i = 1; i < max; i++) { // test ob alle enthalten sind
+        if (!check[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+\end{lstlisting}
+
+\subsubsection*{c)}
+Schreiben Sie eine Methode \textbf{void reverse()}, die die Reihenfolge der Listenelemente
+umkehrt. Beispiel: Falls $l$ die Liste $5, 1, 2,-4, 3$ ist, dann soll $l$ nach Aufruf der
+Methode die Liste $3,-4, 2, 1, 5$ sein.
+
+\begin{lstlisting}
+void reverse() {
+    if(isEmpty()) // wenn leer mache nichts
+        return;
+    Node currNode,nextNode , loopNode;
+    currNode = node; 
+    nextNode = node.next.node; 
+    node.next.node = null;
+
+    while(nextNode != null) {
+        loopNode = nextNode.next.node;
+        nextNode.next.node = currNode;
+        currNode = nextNode;
+        nextNode = loopNode;
+    }
+    node = currNode;
+}
+\end{lstlisting}
+
+\section*{Klausur 2 a}
+\subsection*{Aufgabe 1: Programmverständnis}
+Das folgende Programm benutzt eine zirkuläre Liste.
+\begin{lstlisting}
+class Node {
+	int val;
+	Node next;
+	
+	Node (int val) {
+		this.val = val;
+	}
+}
+
+class Josephus {
+	public static void main(String[] args) {
+		int n = 19,
+		m = 5;
+		Node t = new Node(2),
+		x = t;
+		for (int i = n-1; i >= 0; i=i-3) {
+			x = (x.next = new Node(i+1));
+		}
+		System.out.print(x.val); // (*)
+		x.next = t.next;
+		while (x != x.next) {
+			for (int i = 0; i <= m; i++)
+				x = x.next;
+			System.out.print(";" + x.val);
+			x.next = x.next.next;
+		}
+		System.out.println();
+		System.out.println("Nr. " + x.val + " ist der Gewinner.");
+	}
+}
+\end{lstlisting}
+
+\subsubsection*{a)}
+Welche Elemente besitzt die Liste bei der Ausführung von (*)? Geben Sie die Listenelemente in der Reihenfolge an, wie sie eingefügt wurden.\\
+
+Es wird 1 an der Position (*) ausgegeben.\\
+
+Die Reihenfolge ist: 2, 19, 16, 13, 10, 7, 4, 1
+
+\subsubsection*{b)}
+Was gibt das Programm aus?\\
+
+1;4;4;16;7;7;7\\
+Nr. 7 ist der Gewinner.
+
+\subsection{Aufgabe 2: Aufzählungstypen, Pakete, Annotationen, Parallelprogrammierung}
+Bitte
+kreuzen Sie an. Für jede richtige Antwort erhalten Sie einen Punkt, für jede falsche Antwort
+wird ein Punkt abgezogen. Kein Kreuz bzw. zwei Kreuze bedeuten 0 Punkte. Die minimale
+Gesamtpunktzahl für diese Aufgabe beträgt 0 Punkte. Alle Fragen dieser Aufgabe
+beziehen sich auf Java.
+
+\begin{tabular}{llll}
+& & wahr & falsch\\ 
+1.& Enum-Werte können mit equals auf Gleichheit getestet werden.  & \CheckedBox &  \\
+2.& Enum-Klassen implementieren die Schnittstelle Comparable. & \CheckedBox &  \\
+3.& Durch statischen Import können Konstanten aus Interfaces importiert werden. & \CheckedBox & \\
+4.& Die Anweisung package ordnet eine Klasse einem Paket zu. & \CheckedBox & \\
+5.& Annotationen dürfen annotiert werden. &  & \CheckedBox \\
+6.& Annotationen sind vorgegeben und können nicht selbst programmiert werden. &  & \CheckedBox \\
+7.& Ein Aufruf der Methode run der Klasse Thread erzeugt einen Thread.  &  & \CheckedBox\\
+8.& Die Klasse Thread gehört zum Paket java.lang und braucht daher
+nicht importiert zu werden. & \CheckedBox &   
+\end{tabular}\\
+
+Anmerkungen:\\
+
+\begin{tabular}{lp{15cm}} 
+1.& Wahr, equals leitet auf (==) ab und es Existiert immer nur ein einziges Enum Objekt..\\
+2.& Wahr, All Implemented Interfaces: Serializable, Comparable<E>\\
+3.& Wahr, aber sollte nicht oft verwendet werden da sich Math.PI einfacher bzw verständlicher liest als PI\\
+5.& Falsch, mir ist kein Beispiel bekannt bei dem es zulässig ist\\
+6.& Falsch, implementieren des Interfaces: java.lang.annotation.Annotation\\
+7.& Falsch, Run() startet die Run() des Thrads auf dem Aufrufer. Nur Start() startet Run() auf dem neuen Thread.\\
+8.& Wahr, java.lang.Thread.  
+\end{tabular}
+
+\subsection*{Aufgabe 3: GUI}
+Beschreiben Sie kurz die Aufgaben der folgenden
+Klassen/Schnittstellen der Swing-Bibliothek.\\
+
+\begin{tabular}{p{5cm}p{15cm}}
+JLabel: & Darstellung von Texten und Bildern \\
+JTextArea: & Darstellung einer mehrzeiligen Texteingabe\\
+JTextField: & Darstellung einer einzeiligen Texteingabe\\
+JRadioButton: & Button Gruppe bei der immer nur maximal ein Button selektiert ist\\
+Nennen Sie zwei Layout-Klassen: & FlowLayout, BorderLayout, GridLayout, GridBagLayout\ldots\\
+Nennen Sie zwei mögliche Darstellungen der Farbe „Schwarz“: & Color.black, Color.Black (ist der Verweiß auf black), new Color(0,0,0)
+\end{tabular}
+
+\subsection*{Aufgabe 4: Fehlerkorrektur, Generizität}
+
+\begin{lstlisting}
+    public static <T extends Comparable<? super T>> void sort(T[] a) {
+         for (int j=1; j<=a.length-1; j++) {
+         	int k = a[j]; // k muss T statt int sein
+         	int i = j-1;
+         	
+         	while (i>=0 && a[i].compareTo(k)>null) { // > 0 statt > null
+         		a[i+1] = a[i];
+         		i--;
+         	}
+         	a[i+1] = k;
+        }
+    }
+    
+    public static void main(String[] args) {
+        int[] d = {9,4,1,5,6}; // d muss Integer[] statt int[] sein, 
+        //da nur Integer Comparable implementiert
+        sort(d);
+    }
+\end{lstlisting}
+
+\subsection*{Aufgabe 5: Programmzuverlässigkeit}
+
+\begin{lstlisting}
+static int f(int m, int n) {
+	assert m>=n; // Vorbedingung P
+	int i = m+1,
+	x = 0;
+	assert ... // Schleifeninvariante Q
+	while (i > n+1) {
+		x = x+m+n;
+		i = i-1;
+		assert ... // Schleifeninvariante Q
+	}
+	assert ... // Nachbedingung R
+	return x;
+}
+\end{lstlisting}
+
+\subsubsection*{a)} 
+Welchen Wert berechnet diese Methode? Formulieren Sie eine entsprechende Nachbedingung R.\\
+
+$R: x = \sum_{m}^{j = n}m + n$
+
+\subsubsection*{b)} 
+Geben Sie eine geeignete Schleifeninvariante Q an, mit deren Hilfe die partielle Korrektheit der Methode bezüglich P und R nachgewiesen werden kann. Sie brauchen den Nachweis nicht zu führen.
+
+$Q: n + 1 \leq i \leq m + 1 \wedge x = \sum_{m + 1 - i}^{j = 0}m + n$
+\subsubsection*{c)} 
+Formulieren Sie Q und R als Java-Ausdrücke, sodass diese in den obigen assert-Anweisungen verwendet werden können.
+\begin{lstlisting}
+Q : assert (n + 1 <= i && i <= m + 1) && x == (m + 1 - i) * (m + n);
+
+R : assert x == (m - n) * (m + n);
+\end{lstlisting}
+\subsection*{Aufgabe 6:Datenstrukturen}
+Gegeben seien die folgenden Klassen Knoten und Suchbaum
+zur Implementierung binärer Suchbäume:
+
+\begin{lstlisting}
+public class Knoten {
+	public int wert;
+	public Suchbaum links, rechts;
+
+	public Knoten(int wert) {
+		this.wert = wert;
+		this.links = new Suchbaum();
+		this.rechts = new Suchbaum();
+	}
+}
+
+public class Suchbaum {
+	private Knoten wurzel = null;
+	
+	public boolean isEmpty() {
+		return wurzel == null;
+	}
+	
+	public void insert(int x) {
+		if (isEmpty())
+			wurzel = new Knoten(x);
+		else
+			if (x < wurzel.wert)
+				wurzel.links.insert(x);
+			else
+				wurzel.rechts.insert(x);
+	}
+
+	public String toString() {
+		if (isEmpty())
+			return "_";
+		else
+			return ":"+wurzel.links+
+		wurzel.rechts+wurzel.wert;
+	}
+}
+\end{lstlisting}
+
+Die Knotenwerte 4 und 5 sind mehr als einmal im Suchbaum enthalten. Als Einfachsumme
+des Baumes bezeichnen wir die Summe aller Knotenwerte, dabei werden Werte, die mehrfach
+im Suchbaum enthalten sind, nur einmal addiert. Die Einfachsumme für den obigen
+Suchbaum beträgt also 0 + 2 + 3 + 4 + 5 + 8 = 22.
+
+
+\subsubsection*{a)}
+Was gibt das folgende Programmfragment aus?\\
+
+\begin{lstlisting}
+Suchbaum t = new Suchbaum();\\
+t.insert(4); t.insert(5); t.insert(4); t.insert(2); t.insert(1);\\
+System.out.println(t);\\
+\end{lstlisting}
+
+:::\_\_1\_2::\_\_4\_54
+\subsubsection*{b)}
+Zeichnen Sie den Graphen des Baumes aus a) wie im obigen Beispiel.\\
+
+Habt ihr in der Übung gesehen.
+
+\subsubsection*{c)}
+Schreiben Sie eine Methode boolean negativ(), die genau dann den Wert true
+liefert, falls mindestens ein Knotenwert des aktuellen Suchbaumes kleiner als 0 ist\\
+
+\begin{lstlisting}
+boolean negativ() {
+    if (this.isEmpty()) // testen ob leer
+        return false;   
+    if (this.wurzel.wert < 0) // testen ob kleiner 0
+        return true;
+    return this.wurzel.links.negativ();// wenn nicht teste links weiter
+}
+\end{lstlisting}
+
+\subsubsection*{d)}
+Schreiben Sie eine Methode int einfach(), die die Einfachsumme des aktuellen
+Suchbaumes zurückgibt\\
+
+\begin{lstlisting}
+int einfach() {
+    return einfach(new Suchbaum());
+}
+
+int einfach(Suchbaum b) {
+    if (this.isEmpty()) 
+        return 0;
+    if (b.insert2(wurzel.wert)) {
+        return this.wurzel.links.einfach(b) + this.wurzel.wert 
+        +  this.wurzel.rechts.einfach(b);
+    }
+    return this.wurzel.links.einfach(b) + this.wurzel.rechts.einfach(b);
+}
+
+public boolean insert2(int x) {
+    if (isEmpty()) {
+        wurzel = new Knoten(x);
+        return true;
+    } else {
+        if (x < wurzel.wert)
+            return wurzel.links.insert2(x);
+        else {
+            if (x > wurzel.wert)
+                return wurzel.rechts.insert2(x);
+            else 
+                return false;
+        }
+    }
+}
+\end{lstlisting}
+\end{document}
