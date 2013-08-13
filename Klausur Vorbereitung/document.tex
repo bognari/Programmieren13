@@ -383,6 +383,35 @@ boolean isPermutation() {
 }
 \end{lstlisting}
 
+oder einfacher:
+
+\begin{lstlisting}
+boolean isPermutation() {
+	int length = this.length();
+	for (int i = 1; i <= length; i++) {
+		if (!this.isIn(i))
+			return false;
+	}
+	return true;
+}
+
+int length() {
+	if (this.isEmpty())
+		return 0;
+	return 1 + this.node.next.length();
+}
+
+boolean isIn(int x) {
+	if(this.isEmpty())
+		return false;
+	if(this.node.item == x)
+		return true;
+	return this.node.next.isIn(x);
+}
+\end{lstlisting}
+
+
+
 \subsubsection*{c)}
 Schreiben Sie eine Methode \textbf{void reverse()}, die die Reihenfolge der Listenelemente
 umkehrt. Beispiel: Falls $l$ die Liste $5, 1, 2,-4, 3$ ist, dann soll $l$ nach Aufruf der
@@ -545,12 +574,12 @@ static int f(int m, int n) {
 \subsubsection*{a)} 
 Welchen Wert berechnet diese Methode? Formulieren Sie eine entsprechende Nachbedingung R.\\
 
-$R: x = \sum_{m}^{j = n}m + n$
+$R: x = \sum^{m}_{j = n}m + n$
 
 \subsubsection*{b)} 
 Geben Sie eine geeignete Schleifeninvariante Q an, mit deren Hilfe die partielle Korrektheit der Methode bezüglich P und R nachgewiesen werden kann. Sie brauchen den Nachweis nicht zu führen.
 
-$Q: n + 1 \leq i \leq m + 1 \wedge x = \sum_{m + 1 - i}^{j = 0}m + n$
+$Q: n + 1 \leq i \leq m + 1 \wedge x = \sum^{m + 1 - i}_{j = 0}m + n$
 \subsubsection*{c)} 
 Formulieren Sie Q und R als Java-Ausdrücke, sodass diese in den obigen assert-Anweisungen verwendet werden können.
 \begin{lstlisting}
