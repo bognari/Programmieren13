@@ -4,3 +4,9 @@
 *.jar
 *.war
 *.ear
+
+*.xml
+
+.idea/.name
+
+*.iml
